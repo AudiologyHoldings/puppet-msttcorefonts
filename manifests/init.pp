@@ -11,9 +11,10 @@
 #
 class msttcorefonts {
 	exec { 'accept-msttcorefonts-license':
-		command => '/bin/sh -c "echo ttf-mscorefonts-installer msttcorefonts/accepted- mscorefonts-eula select true | debconf-set-selections"'
+		command => '/bin/sh -c "echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | debconf-set-selections"',
+		unless  => 'debconf-get-selections | egrep "msttcorefonts/accepted-mscorefonts-eula.*true"'
 	}
-	package { 'msttcorefonts':
+	package { 'ttf-mscorefonts-installer':
 		ensure => installed,
 		require => Exec['accept-msttcorefonts-license']
 	}
