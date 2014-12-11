@@ -10,4 +10,3 @@ Add this module to your project
 Add this to a manifest
 
     class { 'msttcorefonts':  }
-
